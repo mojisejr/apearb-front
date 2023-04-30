@@ -1,0 +1,49 @@
+import "../styles/globals.css";
+import { useState, useEffect } from "react";
+import type { AppProps } from "next/app";
+import "@rainbow-me/rainbowkit/styles.css";
+import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
+import { WagmiConfig, configureChains, createClient, mainnet } from "wagmi";
+import { publicProvider } from "wagmi/providers/public";
+import { sepolia } from "wagmi/chains";
+import { MenuProvider } from "../hooks/context";
+
+const { chains, provider } = configureChains([sepolia], [publicProvider()]);
+
+const { connectors } = getDefaultWallets({
+  appName: "Ape Arb NFT",
+  chains,
+});
+
+const wagmiClient = createClient({
+  autoConnect: true,
+  connectors,
+  provider,
+});
+
+function MyApp({ Component, pageProps }: AppProps) {
+  const [showChild, setShowChild] = useState(false);
+  useEffect(() => {
+    setShowChild(true);
+  }, []);
+
+  if (!showChild) {
+    return null;
+  }
+
+  if (typeof window === "undefined") {
+    return <></>;
+  } else {
+    return (
+      <WagmiConfig client={wagmiClient}>
+        <RainbowKitProvider chains={chains}>
+          <MenuProvider>
+            <Component {...pageProps} />
+          </MenuProvider>
+        </RainbowKitProvider>
+      </WagmiConfig>
+    );
+  }
+}
+
+export default MyApp;
