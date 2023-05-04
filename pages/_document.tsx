@@ -5,7 +5,7 @@ class MyDocument extends Document {
     return (
       <Html>
         <Head>
-          <title>Ape Arb Official</title>
+          <title>Pepe Krub Official</title>
           <meta name="description" content="APE ARB Official" />
           <link rel="shortcut icon" href="/images/apelogo1.png" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />

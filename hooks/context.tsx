@@ -6,19 +6,19 @@ import {
   useState,
 } from "react";
 
-type menuContextType = {
+type appContextType = {
   isOpen: boolean;
   open: () => void;
   close: () => void;
 };
 
-const menuContextDefaultValue: menuContextType = {
+const appContextDefaultValue: appContextType = {
   isOpen: false,
   open: () => {},
   close: () => {},
 };
 
-const MenuContext = createContext<menuContextType>(menuContextDefaultValue);
+const AppContext = createContext<appContextType>(appContextDefaultValue);
 
 type Props = {
   children: ReactNode;
@@ -49,9 +49,9 @@ export function MenuProvider({ children }: Props) {
     close,
   };
 
-  return <MenuContext.Provider value={value}>{children}</MenuContext.Provider>;
+  return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 
 export function useMenu() {
-  return useContext(MenuContext);
+  return useContext(AppContext);
 }

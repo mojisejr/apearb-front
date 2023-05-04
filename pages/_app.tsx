@@ -6,12 +6,11 @@ import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
 import { WagmiConfig, configureChains, createClient, mainnet } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import { sepolia } from "wagmi/chains";
-import { MenuProvider } from "../hooks/context";
 
 const { chains, provider } = configureChains([sepolia], [publicProvider()]);
 
 const { connectors } = getDefaultWallets({
-  appName: "Ape Arb NFT",
+  appName: "PepeKub",
   chains,
 });
 
@@ -37,9 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
-          <MenuProvider>
-            <Component {...pageProps} />
-          </MenuProvider>
+          <Component {...pageProps} />
         </RainbowKitProvider>
       </WagmiConfig>
     );

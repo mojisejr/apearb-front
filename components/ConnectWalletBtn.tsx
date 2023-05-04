@@ -44,7 +44,7 @@ export const ConnectWalletButton = () => {
                     }}
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.3 }}
-                    className="relative bg-ape_yellow  text-ape_white pl-[30px] pr-[30px] pt-1 pb-1 min-w-[100px] text-[20px] rounded-[30px]"
+                    className="relative bg-pepe_nothing text-pepe_white pl-[30px] pr-[30px] pt-1 pb-1 min-w-[100px] text-[20px] rounded-[30px]"
                     onClick={openConnectModal}
                     type="button"
                   >
@@ -56,7 +56,7 @@ export const ConnectWalletButton = () => {
               if (chain.unsupported) {
                 return (
                   <button
-                    className="bg-[#ff0330]  text-thuiwhite pl-[2%] pr-[2%] pt-[1%] pb-[1%] min-w-[100px] text-[15px] rounded-[30px]
+                    className="bg-[#ff0330]  text-pepe_white pl-[2%] pr-[2%] pt-[1%] pb-[1%] min-w-[100px] text-[15px] rounded-[30px]
                     tabletS:text-[30px]
                     tabletS:w-[250px]
                     "
