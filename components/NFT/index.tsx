@@ -4,7 +4,7 @@ import styles from "../Home/Title.module.css";
 
 const NFTBox: FunctionComponent<PropsWithChildren> = () => {
   return (
-    <div className="flex justify-center w-full mb-10 items-center gap-2 text-pepe_white pb-[10%]">
+    <div className="flex justify-center w-full items-center gap-2 text-pepe_white pb-[10%]">
       <div className="max-w-[600px]">
         <div className={`text-[60px] ${styles.textStroke}`}>Free Mint NFT</div>
         <div className="text-[20px] pb-10">

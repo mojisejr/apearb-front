@@ -4,8 +4,8 @@ import BorderBox from "../Shared/BorderBox";
 
 const TokenomicBox: FunctionComponent<PropsWithChildren> = () => {
   return (
-    <div className="flex flex-col justify-center w-full mb-10 items-center gap-2 text-pepe_white pb-[10%]">
-      <div className="text-[60px] mb-10">TOKENOMICS</div>
+    <div className="flex flex-col justify-center w-full items-center gap-2 text-pepe_white pb-[10%]">
+      <div className="text-[60px]">TOKENOMICS</div>
       <div className="flex gap-10">
         <div className=" flex flex-col  gap-[30px] max-w-[500px]">
           <div>
@@ -13,7 +13,7 @@ const TokenomicBox: FunctionComponent<PropsWithChildren> = () => {
             <div>420,690,000,000,000</div>
           </div>
           <BorderBox>
-            <div className="text-[25px] mb-10">
+            <div className="text-[25px] pb-10">
               No Taxes, No Bullshit. It{"'"}s that simple.
             </div>
             <div className="text-xl">
