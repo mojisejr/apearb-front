@@ -6,7 +6,10 @@ import { ConnectWalletButton } from "../ConnectWalletBtn";
 const Header: FunctionComponent<PropsWithChildren> = () => {
   return (
     <div className="bg-pepe_green1 h-[100px] flex justify-evenly items-center">
-      <div className="w-36">
+      <div
+        className="w-36
+      tabletM:w-[250px]"
+      >
         <Image src="/images/pepelogo.png" alt="logo" width={250} height={250} />
       </div>
       <div
