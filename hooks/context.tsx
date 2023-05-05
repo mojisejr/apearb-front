@@ -5,17 +5,24 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useReadApprove } from "../blockchain/Tokens/ERC20/ERC20.read";
 
 type appContextType = {
-  isOpen: boolean;
-  open: () => void;
-  close: () => void;
+  isLoading: boolean;
+  isMinting: boolean;
+  isApproved: boolean;
+  setMinting: (state: boolean) => void;
+  setApprove: (state: boolean) => void;
+  setLoading: (state: boolean) => void;
 };
 
 const appContextDefaultValue: appContextType = {
-  isOpen: false,
-  open: () => {},
-  close: () => {},
+  isLoading: false,
+  isMinting: false,
+  isApproved: false,
+  setMinting: () => {},
+  setApprove: () => {},
+  setLoading: () => {},
 };
 
 const AppContext = createContext<appContextType>(appContextDefaultValue);
@@ -24,34 +31,40 @@ type Props = {
   children: ReactNode;
 };
 
-export function MenuProvider({ children }: Props) {
-  const [isOpen, setIsOpen] = useState(false);
+export function AppProvider({ children }: Props) {
+  const { approveRead } = useReadApprove();
+  const [isMinting, setMintingState] = useState(false);
+  const [isApproved, setApproveState] = useState(false);
+  const [isLoading, setLoadingState] = useState(false);
 
   useEffect(() => {
-    setIsOpen(false);
-  }, []);
+    setApproveState(approveRead);
+  }, [approveRead]);
 
-  function open() {
-    if (isOpen == false) {
-      setIsOpen(true);
-    }
+  function setMinting(state: boolean) {
+    setMintingState(state);
   }
 
-  function close() {
-    if (isOpen == true) {
-      setIsOpen(false);
-    }
+  function setApprove(state: boolean) {
+    setApproveState(state);
+  }
+
+  function setLoading(state: boolean) {
+    setLoadingState(state);
   }
 
   const value = {
-    isOpen,
-    open,
-    close,
+    isLoading,
+    isMinting,
+    isApproved,
+    setMinting,
+    setApprove,
+    setLoading,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
 }
 
-export function useMenu() {
+export function useAppContext() {
   return useContext(AppContext);
 }

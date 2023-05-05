@@ -6,8 +6,13 @@ import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
 import { WagmiConfig, configureChains, createClient, mainnet } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import { sepolia } from "wagmi/chains";
+import { bitkub_testnet } from "../blockchain/chain";
+import { AppProvider } from "../hooks/context";
 
-const { chains, provider } = configureChains([sepolia], [publicProvider()]);
+const { chains, provider } = configureChains(
+  [bitkub_testnet],
+  [publicProvider()]
+);
 
 const { connectors } = getDefaultWallets({
   appName: "PepeKub",
@@ -36,7 +41,9 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
-          <Component {...pageProps} />
+          <AppProvider>
+            <Component {...pageProps} />
+          </AppProvider>
         </RainbowKitProvider>
       </WagmiConfig>
     );
