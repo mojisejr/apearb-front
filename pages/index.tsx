@@ -6,8 +6,6 @@ import Content from "../components/Layout/Content";
 import Title from "../components/Home/Title";
 
 const Home: NextPage = () => {
-  const { isConnected } = useAccount();
-
   return (
     <Layout>
       <Header />

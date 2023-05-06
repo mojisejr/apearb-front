@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { FunctionComponent, PropsWithChildren } from "react";
 import styles from "./Title.module.css";
+import Link from "next/link";
 
 const Title: FunctionComponent<PropsWithChildren> = () => {
   return (
@@ -24,19 +25,31 @@ const Title: FunctionComponent<PropsWithChildren> = () => {
           pepekub <br /> the new chapter of the kub chain legend.
         </div>
         <div>
-          <ul className="flex gap-2 mt-10">
-            <li>
+          <ul className="flex gap-2 mt-10 items-center">
+            <li className="drop-shadow-xl">
               <Image
-                src="/images/twitter.png"
-                alt="twitter"
+                src="/images/coin.png"
+                alt="bitkub"
                 width={100}
                 height={100}
               />
             </li>
-            <li>
-              <Image src="/images/tg.png" alt="tg" width={100} height={100} />
+            <li className="drop-shadow-xl">
+              <Link href="https://twitter.com/PepeKrub" target="_blank">
+                <Image
+                  src="/images/twitter.png"
+                  alt="twitter"
+                  width={100}
+                  height={100}
+                />
+              </Link>
             </li>
-            <li>
+            <li className="drop-shadow-xl">
+              <Link href="https://t.me/PepeKrub" target="_blank">
+                <Image src="/images/tg.png" alt="tg" width={100} height={100} />
+              </Link>
+            </li>
+            <li className="drop-shadow-xl">
               <Image
                 src="/images/bitkub.png"
                 alt="bitkub"
@@ -46,6 +59,15 @@ const Title: FunctionComponent<PropsWithChildren> = () => {
             </li>
           </ul>
         </div>
+        <Link
+          href="/howtobuy"
+          className="mt-5 pl-3 pr-3 pt-2 pb-2 bg-pepe_green1 text-[25px]
+          border-[2px] border-pepe_white
+          rounded-md hover:underline
+          hover:shadow-[0px_0px_30px_6px_rgb(255,255,0)] transition-all 0.2"
+        >
+          Buy Pepe Noi Krub!
+        </Link>
       </div>
       <div
         className="hidden

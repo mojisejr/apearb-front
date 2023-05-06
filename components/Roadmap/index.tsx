@@ -17,7 +17,7 @@ const RoadmapBox: FunctionComponent<PropsWithChildren> = () => {
           <ul className="text-center font-thin">
             <li>Whitelist NFT</li>
             <li>Launch</li>
-            <li>List $PEPEKUB swap</li>
+            <li>List $PEPEKRUB swap</li>
             <li>Free mint NFT</li>
             <li>Honeypot</li>
             <li>1,000+ Holders</li>
@@ -38,7 +38,7 @@ const RoadmapBox: FunctionComponent<PropsWithChildren> = () => {
         <BorderBox>
           <div className="text-center mb-2 text-xl">Phase 3</div>
           <ul className="text-center font-thin">
-            <li>Lancepad</li>
+            <li>LaunchPad</li>
             <li>Meme Club</li>
             <li>Pepekub on Dubai</li>
             <li>T1 Exchange Listings</li>

@@ -17,23 +17,28 @@ const TokenomicBox: FunctionComponent<PropsWithChildren> = () => {
               No Taxes, No Bullshit. It{"'"}s that simple.
             </div>
             <div className="text-xl">
-              93.1% of the tokens were sent to the liquidity pool, LP tokens
-              were burnt, and contract is renounced. The remaining 6.9% of the
-              supply is being held in a multi-sig wallet only to be used as
-              tokens for future centralized exchange listings, bridges, and
-              liquidity pools.
+              88.9% of the tokens were sent to the liquidity pool, LP tokens
+              were burnt, and contract is renounced. The remaining 6.2% of the
+              supply to be used as tokens for future centralized exchange
+              listings, earn, game, marketing, bridges, liquidity pools and many
+              more. 4.9 % Finally, give away airdrops to pepekrub disciples who
+              participate in the event.
             </div>
           </BorderBox>
         </div>
-        <div className="flex flex-col justify-center items-center gap-10">
+        <div className="relative flex flex-col justify-center items-center gap-10">
+          <div className="absolute top-10 left-0">
+            <div>Other:</div>
+            <div>6.2%</div>
+          </div>
           <div>
-            <div>CEX Listings:</div>
-            <div>6.9%</div>
+            <div>Airdrop:</div>
+            <div>4.9%</div>
           </div>
           <Image src="/images/pepeo.png" width={300} height={300} alt="o" />
           <div>
             <div>Liquidity Pool:</div>
-            <div>93.1%</div>
+            <div>88.9%</div>
           </div>
         </div>
       </div>

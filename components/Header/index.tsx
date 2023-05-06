@@ -23,8 +23,14 @@ const Header: FunctionComponent<PropsWithChildren> = () => {
           <li className="hover:underline">
             <Link href="/about">ABOUT</Link>
           </li>
-          <li className="hover:underline">
-            <Link href="/howtobuy">HOW TO BUY</Link>
+          <li
+            className="font-bold  bg-pepe_white text-pepe_green1 pl-2 pr-2 rounded-sm
+          hover:underline
+          hover:text-pepe_black
+          hover:shadow-[0px_0px_30px_6px_rgb(255,255,0)]
+          transition-all 0.2"
+          >
+            <Link href="/howtobuy">BUY!</Link>
           </li>
           <li className="hover:underline">
             <Link href="/tokenomic">TOKENOMIC</Link>
