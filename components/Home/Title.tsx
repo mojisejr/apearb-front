@@ -22,7 +22,7 @@ const Title: FunctionComponent<PropsWithChildren> = () => {
         tabletM:pl-0"
         >
           When PEPE visits the kub chain. <br /> Pepe disciples will make
-          pepekub <br /> the new chapter of the kub chain legend.
+          Pepekrub <br /> the new chapter of the kub chain legend.
         </div>
         <div>
           <ul className="flex gap-2 mt-10 items-center">

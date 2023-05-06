@@ -27,13 +27,23 @@ export const contracts = {
     address: address.pepe as `0x${string}`,
   },
   pairs: {
-    ethToToken: [
-      "0xe27e65bf9bdc148c6248b495386571fd49410f27",
-      "0xB55d9A6062767E30bEce52ba5267646DfE39A8aE",
-    ],
-    tokenToEth: [
-      "0xB55d9A6062767E30bEce52ba5267646DfE39A8aE",
-      "0xe27e65bf9bdc148c6248b495386571fd49410f27",
-    ],
+    ethToToken: {
+      addr: [
+        "0xe27e65bf9bdc148c6248b495386571fd49410f27",
+        "0xB55d9A6062767E30bEce52ba5267646DfE39A8aE",
+      ],
+      token0Img: "/images/bitkub.png",
+      token1Img: "/images/coin.png",
+    },
+    tokenToEth: {
+      addr: [
+        "0xB55d9A6062767E30bEce52ba5267646DfE39A8aE",
+        "0xe27e65bf9bdc148c6248b495386571fd49410f27",
+      ],
+      token0Img: "/images/bitkub.png",
+      token1Img: "/images/coin.png",
+    },
   },
 };
+
+// ["0xe27e65bf9bdc148c6248b495386571fd49410f27","0xB55d9A6062767E30bEce52ba5267646DfE39A8aE"]

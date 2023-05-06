@@ -40,7 +40,7 @@ const RoadmapBox: FunctionComponent<PropsWithChildren> = () => {
           <ul className="text-center font-thin">
             <li>LaunchPad</li>
             <li>Meme Club</li>
-            <li>Pepekub on Dubai</li>
+            <li>Pepekrub on Dubai</li>
             <li>T1 Exchange Listings</li>
             <li>100,000+ holders</li>
             <li>Meme Takeover</li>
