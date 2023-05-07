@@ -55,7 +55,7 @@ export function useReadApproveForSwap(swapAmount: number) {
     },
     onSuccess(allowance: BigNumber) {
       if (
-        swapAmountBigNum.toString() > "0" ||
+        swapAmountBigNum.toString() > "0" &&
         allowance.gte(swapAmountBigNum)
       ) {
         setData(true);
