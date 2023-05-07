@@ -1,13 +1,22 @@
-import { FunctionComponent, PropsWithChildren } from "react";
+import { FunctionComponent, PropsWithChildren, useState } from "react";
 import SwapBox from "./SwapBox";
+import { useAccount } from "wagmi";
+import CountdownTimer from "../Shared/Countdown";
 
 const BuyBox: FunctionComponent<PropsWithChildren> = () => {
+  const { isConnected } = useAccount();
   return (
     <div className="flex justify-center w-full mb-10 items-center gap-2 text-pepe_white pb-[10%]">
       <div className="flex flex-col">
         <div className="text-[60px]">Buy</div>
-        {/* <SwapBox /> */}
-        <BuyBoxSoon />
+        {isConnected ? (
+          <div>
+            <SwapBox />
+            {/* <BuyBoxSoon /> */}
+          </div>
+        ) : (
+          <div className="text-[30px]">Please Connect Wallet!!</div>
+        )}
       </div>
     </div>
   );

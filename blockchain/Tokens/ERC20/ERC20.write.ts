@@ -2,7 +2,9 @@ import { useContractWrite } from "wagmi";
 import { contracts } from "../../contract";
 import { useGetPotData } from "../../HoneyPot/Pot.read";
 import { useAppContext } from "../../../hooks/context";
-import { BigNumber, BigNumberish } from "ethers";
+import { BigNumber, BigNumberish, ethers } from "ethers";
+import { useAppSwapContext } from "../../../hooks/swapContext";
+import { notify } from "../../../helpers/notify";
 
 export function useApprove() {
   const { potData } = useGetPotData();
@@ -30,5 +32,27 @@ export function useApprove() {
 
   return {
     approve: approve.write,
+  };
+}
+
+export function useApproveForSwap(swapAmount: number) {
+  const { setApproveLoading } = useAppSwapContext();
+  const swapAmountBigNum = ethers.utils.parseEther(swapAmount.toString());
+
+  const approve = useContractWrite({
+    ...contracts.pepe,
+    functionName: "approve",
+    args: [contracts.diamon.address, swapAmountBigNum.toString()],
+    mode: "recklesslyUnprepared",
+    onError() {
+      setApproveLoading(false);
+    },
+    onSuccess(data: any) {
+      // setApproveLoading(false);
+    },
+  });
+
+  return {
+    approveForSwap: approve.write,
   };
 }
