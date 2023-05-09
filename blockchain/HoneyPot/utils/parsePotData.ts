@@ -17,20 +17,20 @@ export function parsePotData(
     return undefined;
   }
   const parsed: IPotData = {
-    endTime: +data[0].toString(),
+    endTime: +data[0]?.toString(),
     price: {
-      wei: data[1].toString(),
-      ether: ethers.utils.formatEther(data[1]),
+      wei: data[1]?.toString(),
+      ether: ethers.utils.formatEther(data[1] || "0"),
       bignum: data[1],
     },
     fee: {
-      wei: data[2].toString(),
-      ether: ethers.utils.formatEther(data[2]),
+      wei: data[2]?.toString(),
+      ether: ethers.utils.formatEther(data[2] || "0"),
       bignum: data[2],
     },
-    currentTokenId: data[3].toString(),
-    currentRound: data[4].toString(),
-    roundMintedCount: data[5].toString(),
+    currentTokenId: data[3]?.toString(),
+    currentRound: data[4]?.toString(),
+    roundMintedCount: data[5]?.toString(),
     winnerPicked: data[6],
     isPaused: data[7],
   };

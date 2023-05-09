@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { motion } from "framer-motion";
 
@@ -90,9 +91,11 @@ export const ConnectWalletButton = () => {
                         }}
                       >
                         {chain.iconUrl && (
-                          <img
+                          <Image
                             alt={chain.name ?? "Chain icon"}
                             src={chain.iconUrl}
+                            width={12}
+                            height={12}
                             style={{ width: 12, height: 12 }}
                           />
                         )}

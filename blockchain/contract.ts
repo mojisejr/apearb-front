@@ -1,12 +1,21 @@
-import { abiDaimonRouter } from "./DiamonFinance/Router/Rounter.abi";
+import { abiDaimonRouter } from "./DiamonFinance/Router/Router.abi";
 import { abiDaimonFactory } from "./DiamonFinance/Factory/Factory.abi";
 import { abiHoneyPot } from "./HoneyPot/Pot.abi";
 import { abiERC20 } from "./Tokens/ERC20/ERC20.abi";
+import { abiAridrop } from "./Airdrop/Airdrop.abi";
 const address = {
-  diamonRounter: "0xbD84F72a48a3B8412e0954e03BbDC218Dd194740",
+  // diamonRounter: "0xbD84F72a48a3B8412e0954e03BbDC218Dd194740",
+  // daimonFactory: "0x6E906Dc4749642a456907deCB323A0065dC6F26E",
+  // pot: "0x7aAFC8bECA9Ed0c4Fe68a41ad62064A46A2E77A4",
+  // pepe: "0xB55d9A6062767E30bEce52ba5267646DfE39A8aE",
+  // weth: "",
+  diamonRounter: "0xAb30a29168D792c5e6a54E4bcF1Aec926a3b20FA",
   daimonFactory: "0x6E906Dc4749642a456907deCB323A0065dC6F26E",
   pot: "0x7aAFC8bECA9Ed0c4Fe68a41ad62064A46A2E77A4",
-  pepe: "0xB55d9A6062767E30bEce52ba5267646DfE39A8aE",
+  pepe: "0x54e087D69C2917460E4c2CcedEE5fc2a6Df28239",
+  weth: "0x67ebd850304c70d983b2d1b93ea79c7cd6c3f6b5",
+  lp: "0x5931Dc7d9d5990a665bb149604a478433090aBA0",
+  airdrop: "0x283D1b7f997524B09fe50833fF011fD3E868d0d9",
 };
 
 export const contracts = {
@@ -26,24 +35,26 @@ export const contracts = {
     abi: abiERC20,
     address: address.pepe as `0x${string}`,
   },
+  airdrop: {
+    abi: abiAridrop,
+    address: address.airdrop as `0x${string}`,
+  },
   pairs: {
     ethToToken: {
-      addr: [
-        "0xe27e65bf9bdc148c6248b495386571fd49410f27",
-        "0xB55d9A6062767E30bEce52ba5267646DfE39A8aE",
-      ],
+      addr: [address.weth, address.pepe],
       token0Img: "/images/bitkub.png",
       token1Img: "/images/coin.png",
     },
     tokenToEth: {
-      addr: [
-        "0xB55d9A6062767E30bEce52ba5267646DfE39A8aE",
-        "0xe27e65bf9bdc148c6248b495386571fd49410f27",
-      ],
+      addr: [address.pepe, address.weth],
       token0Img: "/images/bitkub.png",
       token1Img: "/images/coin.png",
     },
   },
+  lp: address.lp,
 };
 
 // ["0xe27e65bf9bdc148c6248b495386571fd49410f27","0xB55d9A6062767E30bEce52ba5267646DfE39A8aE"]
+// [0xe27e65bf9bdc148c6248b495386571fd49410f27,0xB55d9A6062767E30bEce52ba5267646DfE39A8aE]
+
+// [0x67ebd850304c70d983b2d1b93ea79c7cd6c3f6b5,0xdbeaa777a5ccab24baa9220257d27d59b4336603]

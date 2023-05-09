@@ -1,9 +1,43 @@
 import Image from "next/image";
-import { FunctionComponent, PropsWithChildren } from "react";
+import {
+  FunctionComponent,
+  PropsWithChildren,
+  SyntheticEvent,
+  useEffect,
+  useState,
+} from "react";
 import styles from "./Title.module.css";
 import Link from "next/link";
+import { useAccount } from "wagmi";
+import {
+  useAirdropUser,
+  useReadAirdropData,
+} from "../../blockchain/Airdrop/Airdrop.read";
+import { useClaim } from "../../blockchain/Airdrop/Airdrop.write";
+import CountdownTimer from "../Shared/Countdown";
 
 const Title: FunctionComponent<PropsWithChildren> = () => {
+  const [end, setEnd] = useState(false);
+  const { isConnected, address } = useAccount();
+  const { claimable, refetchUserAirdrop } = useAirdropUser(
+    address as `0x${string}`
+  );
+
+  const { airdropData, refetchAridrop } = useReadAirdropData();
+
+  const { claim } = useClaim();
+
+  useEffect(() => {
+    refetchUserAirdrop();
+    refetchAridrop();
+    setEnd(false);
+  }, [isConnected, address]);
+
+  function handleClaim(e: SyntheticEvent) {
+    e.preventDefault();
+    claim();
+  }
+
   return (
     <div className="flex justify-center w-full items-center gap-2 text-pepe_white pb-[10%]">
       <div
@@ -59,7 +93,7 @@ const Title: FunctionComponent<PropsWithChildren> = () => {
             </li>
           </ul>
         </div>
-        <Link
+        {/* <Link
           href="/howtobuy"
           className="mt-5 pl-3 pr-3 pt-2 pb-2 bg-pepe_green1 text-[25px]
           border-[2px] border-pepe_white
@@ -67,7 +101,43 @@ const Title: FunctionComponent<PropsWithChildren> = () => {
           hover:shadow-[0px_0px_30px_6px_rgb(255,255,0)] transition-all 0.2"
         >
           Buy Pepe Noi Krub!
-        </Link>
+        </Link> */}
+        {end ? (
+          <div>
+            {isConnected ? (
+              <div
+                className="mt-5 pl-3 pr-3 pt-2 pb-2 bg-pepe_green1 text-[25px]
+          border-[2px] border-pepe_white
+          rounded-md hover:underline
+          hover:shadow-[0px_0px_30px_6px_rgb(255,255,0)] transition-all 0.2"
+              >
+                {claimable ? (
+                  <button onClick={(e) => handleClaim(e)}>
+                    Claim your airdrop !
+                  </button>
+                ) : (
+                  <div>To be honest. Our airdrop is not for you krub!</div>
+                )}
+              </div>
+            ) : (
+              <div
+                className="mt-5 pl-3 pr-3 pt-2 pb-2 bg-pepe_green1 text-[25px]
+          border-[2px] border-pepe_white
+          rounded-md hover:underline
+          hover:shadow-[0px_0px_30px_6px_rgb(255,255,0)] transition-all 0.2"
+              >
+                Airdrop Time! Connect Wallet!
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="mt-5">
+            <CountdownTimer
+              endtimeMs={airdropData?.start}
+              setCanSettle={setEnd}
+            />
+          </div>
+        )}
       </div>
       <div
         className="hidden

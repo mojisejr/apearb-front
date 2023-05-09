@@ -6,11 +6,12 @@ import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
 import { WagmiConfig, configureChains, createClient, mainnet } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import { sepolia } from "wagmi/chains";
-import { bitkub_testnet } from "../blockchain/chain";
+import { bitkub_mainnet, bitkub_testnet } from "../blockchain/chain";
 import { AppProvider } from "../hooks/context";
+import { AppSwapProvider } from "../hooks/swapContext";
 
 const { chains, provider } = configureChains(
-  [bitkub_testnet],
+  [bitkub_testnet, bitkub_mainnet],
   [publicProvider()]
 );
 
@@ -42,7 +43,9 @@ function MyApp({ Component, pageProps }: AppProps) {
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
           <AppProvider>
-            <Component {...pageProps} />
+            <AppSwapProvider>
+              <Component {...pageProps} />
+            </AppSwapProvider>
           </AppProvider>
         </RainbowKitProvider>
       </WagmiConfig>

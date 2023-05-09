@@ -49,8 +49,6 @@ export function useGetAmountOut(amount: number) {
     },
   });
 
-  console.log("formatted: ", formated.toString());
-
   return {
     swapData,
     refetchSwapData: amountOutData.refetch,

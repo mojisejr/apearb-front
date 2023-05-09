@@ -2,7 +2,7 @@ import { useAccount, useContractRead } from "wagmi";
 import { contracts } from "../../contract";
 import { useGetPotData } from "../../HoneyPot/Pot.read";
 import { useAppContext } from "../../../hooks/context";
-import { BigNumber, BigNumberish } from "ethers";
+import { BigNumber, BigNumberish, ethers } from "ethers";
 import { useState } from "react";
 
 export function useReadApprove() {
@@ -37,5 +37,36 @@ export function useReadApprove() {
 
   return {
     approveRead: data,
+  };
+}
+
+export function useReadApproveForSwap(swapAmount: number) {
+  const { address } = useAccount();
+  const swapAmountBigNum = ethers.utils.parseEther(swapAmount.toString());
+
+  const [data, setData] = useState<boolean>(false);
+
+  const approve = useContractRead({
+    ...contracts.pepe,
+    functionName: "allowance",
+    args: [address, contracts.diamon.address],
+    onError(error) {
+      setData(false);
+    },
+    onSuccess(allowance: BigNumber) {
+      if (
+        swapAmountBigNum.toString() > "0" &&
+        allowance.gte(swapAmountBigNum)
+      ) {
+        setData(true);
+      } else {
+        setData(false);
+      }
+    },
+  });
+
+  return {
+    approveSwap: data,
+    refetchSwap: approve.refetch,
   };
 }

@@ -2,10 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import { FunctionComponent, PropsWithChildren } from "react";
 import { ConnectWalletButton } from "../ConnectWalletBtn";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Header: FunctionComponent<PropsWithChildren> = () => {
   return (
-    <div className="bg-pepe_green1 h-[100px] flex justify-evenly items-center">
+    <div className="relative bg-pepe_green1 h-[100px] flex justify-evenly items-center">
+      <div className="absolute top-2 right-2">
+        <ToastContainer />
+      </div>
       <div
         className="w-36
       tabletM:w-[250px]"
