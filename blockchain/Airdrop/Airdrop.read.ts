@@ -3,7 +3,7 @@ import { contracts } from "../contract";
 import { useState } from "react";
 import { BigNumber } from "ethers";
 
-export function useReadAirdropData(owner: string) {
+export function useReadAirdropData() {
   const [data, setData] = useState({
     // claimed: false,
     // claimable: "0",
