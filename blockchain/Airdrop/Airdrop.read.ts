@@ -48,6 +48,7 @@ export function useReadAirdropData() {
         BigNumber
       ]
     ) {
+      if (data[0] == null) return;
       setData({
         // claimed: data[0],
         // claimable: data[1].toString(),

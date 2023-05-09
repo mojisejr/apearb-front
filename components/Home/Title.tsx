@@ -23,12 +23,14 @@ const Title: FunctionComponent<PropsWithChildren> = () => {
     address as `0x${string}`
   );
 
-  const { airdropData } = useReadAirdropData();
+  const { airdropData, refetchAridrop } = useReadAirdropData();
 
   const { claim } = useClaim();
 
   useEffect(() => {
     refetchUserAirdrop();
+    refetchAridrop();
+    setEnd(false);
   }, [isConnected, address]);
 
   function handleClaim(e: SyntheticEvent) {
