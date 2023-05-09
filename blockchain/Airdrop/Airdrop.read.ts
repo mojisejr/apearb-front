@@ -82,6 +82,7 @@ export function useAirdropUser(user: `0x${string}`) {
       },
     ],
     onSuccess(data: [boolean, BigNumber]) {
+      if (data[0] == null) return;
       if (BigNumber.from(data[1]).gte(0) && data[0] == false) {
         setData(true);
       } else {

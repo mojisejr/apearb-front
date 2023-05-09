@@ -17,7 +17,7 @@ const Title: FunctionComponent<PropsWithChildren> = () => {
     address as `0x${string}`
   );
 
-  const { claim, claimOK } = useClaim();
+  const { claim } = useClaim();
 
   useEffect(() => {
     refetchUserAirdrop();
@@ -104,7 +104,7 @@ const Title: FunctionComponent<PropsWithChildren> = () => {
                 Claim your airdrop !
               </button>
             ) : (
-              <div>To be hornest. Our airdrop is not for you krub!</div>
+              <div>To be honest. Our airdrop is not for you krub!</div>
             )}
           </div>
         ) : (
