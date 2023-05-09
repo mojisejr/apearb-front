@@ -10,13 +10,16 @@
   },
   "dependencies": {
     "@rainbow-me/rainbowkit": "^0.12.7",
+    "dayjs": "^1.11.7",
     "ethers": "^5",
     "framer-motion": "^10.12.4",
     "lodash.merge": "^4.6.2",
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-hook-form": "^7.43.9",
     "react-icons": "^4.8.0",
+    "react-toastify": "^9.1.2",
     "wagmi": "^0.12.9"
   },
   "devDependencies": {

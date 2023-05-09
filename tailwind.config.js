@@ -19,8 +19,8 @@ module.exports = {
     },
     colors: {
       pepe_green1: "#20451A",
-      pepe_black: "#000",
       pepe_white: "#fff",
+      pepe_black: "#000",
       pepe_nothing: "transparent",
     },
     extend: {},

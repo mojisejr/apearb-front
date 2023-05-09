@@ -6,11 +6,17 @@ import { RainbowKitProvider, getDefaultWallets } from "@rainbow-me/rainbowkit";
 import { WagmiConfig, configureChains, createClient, mainnet } from "wagmi";
 import { publicProvider } from "wagmi/providers/public";
 import { sepolia } from "wagmi/chains";
+import { bitkub_mainnet, bitkub_testnet } from "../blockchain/chain";
+import { AppProvider } from "../hooks/context";
+import { AppSwapProvider } from "../hooks/swapContext";
 
-const { chains, provider } = configureChains([sepolia], [publicProvider()]);
+const { chains, provider } = configureChains(
+  [bitkub_testnet, bitkub_mainnet],
+  [publicProvider()]
+);
 
 const { connectors } = getDefaultWallets({
-  appName: "Ape Arb NFT",
+  appName: "PepeKub",
   chains,
 });
 
@@ -36,7 +42,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     return (
       <WagmiConfig client={wagmiClient}>
         <RainbowKitProvider chains={chains}>
-          <Component {...pageProps} />
+          <AppProvider>
+            <AppSwapProvider>
+              <Component {...pageProps} />
+            </AppSwapProvider>
+          </AppProvider>
         </RainbowKitProvider>
       </WagmiConfig>
     );

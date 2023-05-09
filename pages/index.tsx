@@ -1,15 +1,18 @@
 import type { NextPage } from "next";
 import { useAccount } from "wagmi";
-import { ConnectWalletButton } from "../components/ConnectWalletBtn";
+import Layout from "../components/Layout";
+import Header from "../components/Header";
+import Content from "../components/Layout/Content";
+import Title from "../components/Home/Title";
 
 const Home: NextPage = () => {
-  const { isConnected } = useAccount();
-
   return (
-    <div
-      id="container"
-      className="grid grid-cols-12 h-screen w-full text-pepe_white bg-[url('/images/pepetranparent.png')]"
-    ></div>
+    <Layout>
+      <Header />
+      <Content>
+        <Title />
+      </Content>
+    </Layout>
   );
 };
 
