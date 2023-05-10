@@ -12,18 +12,18 @@ const HoneyPot: FunctionComponent<PropsWithChildren> = () => {
     <Layout>
       <Header />
       <Content>
-        <div className="w-full flex justify-center items-center flex-col gap-3 text-pepe_white text-[30px]">
+        {/* <div className="w-full flex justify-center items-center flex-col gap-3 text-pepe_white text-[30px]">
           <div>Pepe Pot Krubbbb!</div>
           <Image src="/images/blue.png" width={450} height={450} alt="blue" />
-        </div>
-        {/* {isConnected ? (
+        </div> */}
+        {isConnected ? (
           <HoneyPotBox />
         ) : (
           <div className="w-full flex justify-center items-center flex-col gap-3 text-pepe_white text-[30px]">
             <div>Pepe Pot Krubbbb!</div>
             <Image src="/images/blue.png" width={450} height={450} alt="blue" />
           </div>
-        )} */}
+        )}
       </Content>
     </Layout>
   );
