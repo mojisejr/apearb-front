@@ -15,7 +15,7 @@ const address = {
   pepe: "0x54e087D69C2917460E4c2CcedEE5fc2a6Df28239",
   weth: "0x67ebd850304c70d983b2d1b93ea79c7cd6c3f6b5",
   lp: "0x5931Dc7d9d5990a665bb149604a478433090aBA0",
-  airdrop: "0x283D1b7f997524B09fe50833fF011fD3E868d0d9",
+  airdrop: "0x23886109fD91D46A7d9f8c4ac72f28f1fee004A1",
 };
 
 export const contracts = {
