@@ -11,7 +11,7 @@ const address = {
   // weth: "",
   diamonRounter: "0xAb30a29168D792c5e6a54E4bcF1Aec926a3b20FA",
   daimonFactory: "0x6E906Dc4749642a456907deCB323A0065dC6F26E",
-  pot: "0x60Aa6b5EDD69a1b32bf98f79870E2A35c478Ac8A",
+  pot: "0xAad0e0b3B76fB59B97d61abC2c6F002cc158b601",
   pepe: "0x54e087D69C2917460E4c2CcedEE5fc2a6Df28239",
   weth: "0x67ebd850304c70d983b2d1b93ea79c7cd6c3f6b5",
   lp: "0xe713f7b70261c58cd0adf3129bba1f5d80f35ce8",
