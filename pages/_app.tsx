@@ -11,7 +11,7 @@ import { AppProvider } from "../hooks/context";
 import { AppSwapProvider } from "../hooks/swapContext";
 
 const { chains, provider } = configureChains(
-  [bitkub_testnet, bitkub_mainnet],
+  [bitkub_mainnet],
   [publicProvider()]
 );
 
