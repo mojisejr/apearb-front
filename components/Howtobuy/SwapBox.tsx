@@ -38,8 +38,6 @@ const SwapBox: FunctionComponent<PropsWithChildren> = () => {
     watch("token0") == undefined ? 0 : +watch("token0")
   );
 
-  console.log(approveSwap);
-
   const { approveForSwap } = useApproveForSwap(
     watch("token0") == undefined ? 0 : +watch("token0")
   );

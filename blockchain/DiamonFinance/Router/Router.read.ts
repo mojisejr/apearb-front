@@ -45,6 +45,7 @@ export function useGetAmountOut(amount: number) {
               : ethers.utils.formatEther(data[1][1].toString()),
         },
       };
+      console.log(format);
       setSwapData(format);
     },
   });

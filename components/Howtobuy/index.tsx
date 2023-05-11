@@ -11,8 +11,8 @@ const BuyBox: FunctionComponent<PropsWithChildren> = () => {
         <div className="text-[60px]">Buy</div>
         {isConnected ? (
           <div>
-            {/* <SwapBox /> */}
-            <BuyBoxSoon />
+            <SwapBox />
+            {/* <BuyBoxSoon /> */}
           </div>
         ) : (
           <div className="text-[30px]">Please Connect Wallet!!</div>
