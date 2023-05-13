@@ -6,7 +6,7 @@ const RoadmapBox: FunctionComponent<PropsWithChildren> = () => {
     <div className="flex flex-col justify-center w-full mb-10 items-center gap-2 text-pepe_white pb-[10%]">
       <div className="text-[60px] mb-10">ROADMAP</div>
       <p className="text-[25px] max-w-[1200px]">
-        You think this is just a meme? We are $pepekub, a quality meme coin. We
+        You think this is just a meme? We are $pepekrub, a quality meme coin. We
         {"'"}re not joking around. Let{"'"}s wait and see. Handing out from the
         first day of the great journey.
       </p>
