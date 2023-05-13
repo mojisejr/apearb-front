@@ -18,6 +18,7 @@ import {
   useWinnnerPickedEvent,
 } from "../../blockchain/HoneyPot/Pot.event";
 import WinnerPicked from "./WinnerPicked";
+import NFTList from "./NftList";
 
 type Inputs = {
   mintAmount: number;
@@ -130,6 +131,7 @@ const HoneyPotBox: FunctionComponent<PropsWithChildren> = () => {
             </p>
           </div>
         </BorderBox>
+        <NFTList />
 
         {/* <Image src="/images/blue.png" width={450} height={450} alt="blue" /> */}
         {potData?.winnerPicked ? (

@@ -4,6 +4,7 @@ import { BigNumber } from "ethers";
 import { parsePotData } from "./utils/parsePotData";
 import { useState } from "react";
 import { IPotData } from "../../interfaces/iPotData";
+import { parsePotMetadata } from "./utils/parsePotMetadata";
 
 function useGetPotData() {
   const [a, setData] = useState<IPotData | undefined>(undefined);
@@ -69,7 +70,6 @@ function useGetWinner(round: string) {
     functionName: "getWinningOfRound",
     args: [round],
     onSuccess(data: string) {
-      console.log(data);
       setWinner(data);
     },
   });
@@ -77,4 +77,28 @@ function useGetWinner(round: string) {
   return { winner };
 }
 
-export { useGetPotData, useGetWinner };
+function useGetMetadataOf(owner: `0x${string}`) {
+  const [metadata, setMetadata] = useState<
+    {
+      name?: string;
+      description?: string;
+      image?: string;
+    }[]
+  >([]);
+  useContractRead({
+    ...contracts.pot,
+    functionName: "metadataOfOwner",
+    args: [owner],
+    onSuccess(data: string[]) {
+      if (!data) return;
+      const metadata = parsePotMetadata(data);
+      setMetadata(metadata);
+    },
+  });
+
+  return {
+    metadata,
+  };
+}
+
+export { useGetPotData, useGetWinner, useGetMetadataOf };

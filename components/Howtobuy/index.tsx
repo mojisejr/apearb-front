@@ -1,7 +1,7 @@
 import { FunctionComponent, PropsWithChildren, useState } from "react";
 import SwapBox from "./SwapBox";
 import { useAccount } from "wagmi";
-import CountdownTimer from "../Shared/Countdown";
+import OutsideLinks from "./OutsideLink";
 
 const BuyBox: FunctionComponent<PropsWithChildren> = () => {
   const { isConnected } = useAccount();
@@ -12,7 +12,7 @@ const BuyBox: FunctionComponent<PropsWithChildren> = () => {
         {isConnected ? (
           <div>
             <SwapBox />
-            {/* <BuyBoxSoon /> */}
+            <OutsideLinks />
           </div>
         ) : (
           <div className="text-[30px]">Please Connect Wallet!!</div>
