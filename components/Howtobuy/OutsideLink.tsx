@@ -11,7 +11,7 @@ export const OutsideLinks = () => {
       </div>
       <div className="flex gap-2 items-center">
         <BsGraphUpArrow />
-        <Link href={config.diamonURI}>Pepe Graph Krub</Link>
+        <Link href={config.pepeGraphUrl}>Pepe Graph Krub</Link>
       </div>
     </div>
   );
