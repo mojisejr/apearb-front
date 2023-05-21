@@ -1,8 +1,9 @@
-import { useContractWrite } from "wagmi";
+import { useAccount, useContractWrite } from "wagmi";
 import { contracts } from "../contract";
 import { useAppContext } from "../../hooks/context";
 import { ethers } from "ethers";
 import { useGetPotData } from "./Pot.read";
+import { notify } from "../../helpers/notify";
 
 export function useBuyTicket(num: number) {
   const { setMinting, setLoading } = useAppContext();
@@ -26,5 +27,25 @@ export function useBuyTicket(num: number) {
 
   return {
     mint: buyData.write,
+  };
+}
+
+export function useApprovalForAllWithGen1() {
+  const { address } = useAccount();
+  const { write } = useContractWrite({
+    ...contracts.pot,
+    functionName: "setApprovalForAll",
+    args: [contracts.gen1.address, true],
+    mode: "recklesslyUnprepared",
+    onError(error) {
+      notify(`error: ${error.message}`);
+    },
+    onSuccess() {
+      notify("Approval Done! wait for tx mined!");
+    },
+  });
+
+  return {
+    approvePotToNft: write,
   };
 }

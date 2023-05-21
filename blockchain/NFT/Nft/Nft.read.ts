@@ -3,6 +3,7 @@ import { useAccount } from "wagmi";
 import { contracts } from "../../contract";
 import { parseNFTMetadata } from "./utils/parseNftMetadata";
 import { useState } from "react";
+import { BigNumber } from "ethers";
 
 export function useGetMetadataOf() {
   const { address } = useAccount();
@@ -27,5 +28,24 @@ export function useGetMetadataOf() {
   return {
     metadata,
     refetchMeta: refetch,
+  };
+}
+
+export function useGetNftTokensOfOwner() {
+  const [tokenIds, setTokenIds] = useState<number[]>([]);
+  const { address } = useAccount();
+
+  useContractRead({
+    ...contracts.gen1,
+    functionName: "tokensOfOwner",
+    args: [address],
+    onSuccess(data: BigNumber[]) {
+      const tokens = data.map((d) => +d.toString());
+      setTokenIds(tokens);
+    },
+  });
+
+  return {
+    nftTokensOfOwner: tokenIds,
   };
 }
