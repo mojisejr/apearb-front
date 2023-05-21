@@ -17,3 +17,18 @@ export function useUplevel(tokenId: number, pots: number[]) {
     uplevel: write,
   };
 }
+
+export function useEvolution() {
+  const { write } = useContractWrite({
+    ...contracts.gen1,
+    functionName: "evolution",
+    mode: "recklesslyUnprepared",
+    onSuccess() {
+      notify("Evolution refresh page to see your NFT!!!");
+    },
+  });
+
+  return {
+    evolution: write,
+  };
+}

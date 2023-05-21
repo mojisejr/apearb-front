@@ -28,6 +28,8 @@ const Inventory = () => {
     { value: number; label: string }[]
   >([]);
 
+  console.log(metadata);
+
   const [selectedGen1, setSelectGen1] = useState<number>(0);
   const [selectedPots, setSelectedPot] = useState<number[]>([]);
 
@@ -74,9 +76,19 @@ const Inventory = () => {
   }
 
   function handleApproveWithGen1(e: SyntheticEvent) {
+    e.preventDefault();
     if (!approvedWithGen1) {
       approvePotToNft();
     }
+  }
+
+  function handleEvolution(e: SyntheticEvent, token: string) {
+    e.preventDefault();
+    const parsed = token.split("#")[1];
+    uplevel({
+      //@ts-ignore
+      args: [parsed],
+    });
   }
 
   return (
@@ -150,7 +162,10 @@ const Inventory = () => {
                       </div>
                     </div>
                     <div className="button flex gap-2 justify-center">
-                      <div className="bg-pepe_green1 pl-3 pr-3 pt-1 pb-1 rounded-md shadow-xl">
+                      <div
+                        className="bg-pepe_green1 pl-3 pr-3 pt-1 pb-1 rounded-md shadow-xl"
+                        onClick={(e) => handleEvolution(e, m.name as string)}
+                      >
                         evolution
                       </div>
                     </div>
