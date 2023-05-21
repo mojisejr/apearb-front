@@ -13,6 +13,7 @@ import {
 } from "../../blockchain/HoneyPot/Pot.read";
 import { notify } from "../../helpers/notify";
 import { useApprovalForAllWithGen1 } from "../../blockchain/HoneyPot/Pot.write";
+import { useUplevel } from "../../blockchain/NFT/Nft/Nft.write";
 
 const Inventory = () => {
   const { isConnected } = useAccount();
@@ -29,6 +30,8 @@ const Inventory = () => {
 
   const [selectedGen1, setSelectGen1] = useState<number>(0);
   const [selectedPots, setSelectedPot] = useState<number[]>([]);
+
+  const { uplevel } = useUplevel(selectedGen1, selectedPots);
 
   useEffect(() => {
     if (tokensOfOwner.length > 0) {
@@ -65,6 +68,8 @@ const Inventory = () => {
     e.preventDefault();
     if (selectedGen1 <= 0 || selectedPots.length <= 0) {
       notify("please select both gen1 and pot tokens");
+    } else {
+      uplevel();
     }
   }
 
