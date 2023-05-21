@@ -15,7 +15,7 @@ const NFTBox: FunctionComponent<PropsWithChildren> = () => {
     >
       {/* <NFTBasePage /> */}
 
-      {isConnected ? <NFTAirdrop /> : <NFTBasePage />}
+      {/* {isConnected ? <NFTAirdrop /> : <NFTBasePage />} */}
       {isConnected ? <Inventory /> : null}
     </div>
   );

@@ -1,12 +1,13 @@
-import { useContractReads, useContractRead } from "wagmi";
+import { useContractReads, useContractRead, useAccount } from "wagmi";
 import { contracts } from "../contract";
 import { BigNumber } from "ethers";
 import { parsePotData } from "./utils/parsePotData";
 import { useState } from "react";
 import { IPotData } from "../../interfaces/iPotData";
 import { parsePotMetadata } from "./utils/parsePotMetadata";
+import { notify } from "../../helpers/notify";
 
-function useGetPotData() {
+export function useGetPotData() {
   const [a, setData] = useState<IPotData | undefined>(undefined);
   const data = useContractReads({
     contracts: [
@@ -63,7 +64,7 @@ function useGetPotData() {
   };
 }
 
-function useGetWinner(round: string) {
+export function useGetWinner(round: string) {
   const [winner, setWinner] = useState<string>("");
   useContractRead({
     ...contracts.pot,
@@ -77,7 +78,7 @@ function useGetWinner(round: string) {
   return { winner };
 }
 
-function useGetMetadataOf(owner: `0x${string}`) {
+export function useGetMetadataOf(owner: `0x${string}`) {
   const [metadata, setMetadata] = useState<
     {
       name?: string;
@@ -101,4 +102,43 @@ function useGetMetadataOf(owner: `0x${string}`) {
   };
 }
 
-export { useGetPotData, useGetWinner, useGetMetadataOf };
+export function useGetTokensOfOwner() {
+  const [tokenIds, setTokenIds] = useState<number[]>([]);
+  const { address } = useAccount();
+
+  useContractRead({
+    ...contracts.pot,
+    functionName: "tokensOfOwner",
+    args: [address],
+    onSuccess(data: BigNumber[]) {
+      const tokens = data.map((d) => +d.toString());
+      setTokenIds(tokens);
+    },
+  });
+
+  return {
+    tokensOfOwner: tokenIds,
+  };
+}
+
+export function useGetIsApprovalForAllWithGen1() {
+  const { address } = useAccount();
+  const [approved, setApproved] = useState<boolean>(false);
+
+  const { refetch } = useContractRead({
+    ...contracts.pot,
+    functionName: "isApprovedForAll",
+    args: [address, contracts.gen1.address],
+    onError(error) {
+      notify("Have to approve before uplevel");
+    },
+    onSuccess(data: boolean) {
+      setApproved(data);
+    },
+  });
+
+  return {
+    approvedWithGen1: approved,
+    reApproveWithGen1: refetch,
+  };
+}
