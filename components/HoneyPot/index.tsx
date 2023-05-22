@@ -19,6 +19,7 @@ import {
 } from "../../blockchain/HoneyPot/Pot.event";
 import WinnerPicked from "./WinnerPicked";
 import NFTList from "./NftList";
+import WinnerBoard from "./WinnerBoard";
 
 type Inputs = {
   mintAmount: number;
@@ -64,7 +65,7 @@ const HoneyPotBox: FunctionComponent<PropsWithChildren> = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center w-full items-center gap-2 text-pepe_white pb-[10%]">
+    <div className="flex w-full justify-center items-center gap-5 text-pepe_white">
       <div className="flex flex-col">
         <div className="leading-[40px]">
           <div className="text-[60px]">Round #{potData?.currentRound}</div>
@@ -132,13 +133,13 @@ const HoneyPotBox: FunctionComponent<PropsWithChildren> = () => {
           </div>
         </BorderBox>
         <NFTList />
-
         {/* <Image src="/images/blue.png" width={450} height={450} alt="blue" /> */}
         {potData?.winnerPicked ? (
           <WinnerPicked round={potData?.currentRound} />
         ) : null}
         {/* <WinnerPicked round={potData?.currentRound!} /> */}
       </div>
+      <WinnerBoard />
     </div>
   );
 };

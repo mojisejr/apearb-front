@@ -11,7 +11,7 @@ const NFTBox: FunctionComponent<PropsWithChildren> = () => {
     <div
       className={`flex ${
         isConnected ? "flex-col" : ""
-      } itmes-center justify-center w-full items-center gap-2 text-pepe_white pb-[10%]`}
+      } itmes-center justify-center w-full items-center gap-2 text-pepe_white`}
     >
       {/* <NFTBasePage /> */}
 
