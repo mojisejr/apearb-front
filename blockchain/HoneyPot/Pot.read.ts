@@ -142,3 +142,110 @@ export function useGetIsApprovalForAllWithGen1() {
     reApproveWithGen1: refetch,
   };
 }
+
+export function useGetWinnerBoard() {
+  const [currentRound, setCurrentRound] = useState<number>(0);
+  const [roundToToken, setRoundToToken] = useState<
+    {
+      round: number;
+      tokenId: string;
+    }[]
+  >([]);
+  const [roundToWinner, setRoundToWinner] = useState<
+    {
+      round: number;
+      address: `0x${string}`;
+    }[]
+  >([]);
+
+  const [images, setImages] = useState<{ round: number; image: string }[]>([]);
+
+  let winTokenArray = [];
+  let winnerWalletArray = [];
+
+  useContractRead({
+    ...contracts.pot,
+    functionName: "ROUND",
+    onSuccess(data: BigNumber) {
+      setCurrentRound(+data.toString());
+    },
+  });
+
+  for (let i = 0; i < currentRound; i++) {
+    winTokenArray.push({
+      address: contracts.pot.address,
+      abi: contracts.pot.abi,
+      functionName: "roundToWinningTokenId",
+      args: [i + 1],
+    });
+
+    winnerWalletArray.push({
+      address: contracts.pot.address,
+      abi: contracts.pot.abi,
+      functionName: "winnerOfRound",
+      args: [i + 1],
+    });
+  }
+
+  useContractReads({
+    contracts: winTokenArray,
+    onError(error) {
+      console.log(error);
+    },
+    onSuccess(data: BigNumber[]) {
+      const output = data.map((d, i) => {
+        return {
+          round: i + 1,
+          tokenId: d.toString(),
+        };
+      });
+      setRoundToToken(output);
+    },
+  });
+
+  useContractReads({
+    contracts: winnerWalletArray,
+    onError(error) {
+      console.log(error);
+    },
+    onSuccess(data: BigNumber[]) {
+      const output = data.map((d, i) => {
+        return {
+          round: i + 1,
+          address: d.toString() as `0x${string}`,
+        };
+      });
+      setRoundToWinner(output);
+    },
+  });
+
+  const imageArray = roundToToken.map((rtt) => {
+    return {
+      address: contracts.pot.address,
+      abi: contracts.pot.abi,
+      functionName: "getCardImageOf",
+      args: [rtt.tokenId],
+    };
+  });
+
+  useContractReads({
+    contracts: imageArray,
+    onSuccess(data: string[]) {
+      const output = data.map((m, i) => {
+        return {
+          round: i + 1,
+          image: m.toString(),
+        };
+      });
+      setImages(output);
+    },
+  });
+
+  return {
+    winnerData: roundToToken
+      .map((item, index) => {
+        return { ...item, ...roundToWinner[index], ...images[index] };
+      })
+      .filter((m) => m.tokenId != "0"),
+  };
+}

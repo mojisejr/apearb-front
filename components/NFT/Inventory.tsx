@@ -28,8 +28,6 @@ const Inventory = () => {
     { value: number; label: string }[]
   >([]);
 
-  console.log(metadata);
-
   const [selectedGen1, setSelectGen1] = useState<number>(0);
   const [selectedPots, setSelectedPot] = useState<number[]>([]);
 
