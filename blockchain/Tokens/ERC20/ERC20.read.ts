@@ -4,6 +4,7 @@ import { useGetPotData } from "../../HoneyPot/Pot.read";
 import { useAppContext } from "../../../hooks/context";
 import { BigNumber, BigNumberish, ethers } from "ethers";
 import { useState } from "react";
+import { connectorsForWallets } from "@rainbow-me/rainbowkit";
 
 export function useReadApprove() {
   const { potData } = useGetPotData();
@@ -68,5 +69,33 @@ export function useReadApproveForSwap(swapAmount: number) {
   return {
     approveSwap: data,
     refetchSwap: approve.refetch,
+  };
+}
+
+export function useReadApproveForBuy(amount: number) {
+  const { address } = useAccount();
+  const price = ethers.utils.parseEther("3000000000000").mul(amount.toString());
+
+  const [data, setData] = useState<boolean>(false);
+
+  const approve = useContractRead({
+    ...contracts.pepe,
+    functionName: "allowance",
+    args: [address, contracts.saleSSR.address],
+    onError(error) {
+      setData(false);
+    },
+    onSuccess(allowance: BigNumber) {
+      if (price.toString() > "0" && allowance.gte(price)) {
+        setData(true);
+      } else {
+        setData(false);
+      }
+    },
+  });
+
+  return {
+    approveBuy: data,
+    refetchBuy: approve.refetch,
   };
 }

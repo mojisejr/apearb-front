@@ -56,3 +56,26 @@ export function useApproveForSwap(swapAmount: number) {
     approveForSwap: approve.write,
   };
 }
+
+export function useApproveForBuyNft(amount: number | string) {
+  const { setApproveLoading } = useAppSwapContext();
+  const price = ethers.utils.parseEther("3000000000000").mul(amount.toString());
+
+  const approve = useContractWrite({
+    ...contracts.pepe,
+    functionName: "approve",
+    args: [contracts.saleSSR.address, price.toString()],
+    mode: "recklesslyUnprepared",
+    onError() {
+      setApproveLoading(false);
+    },
+    onSuccess(data: any) {
+      // setApproveLoading(false);
+      notify("Approved for buying NFT! wait tx mined and mint!");
+    },
+  });
+
+  return {
+    approveForBuyNft: approve.write,
+  };
+}

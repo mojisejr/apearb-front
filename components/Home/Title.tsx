@@ -15,27 +15,44 @@ import {
 } from "../../blockchain/Airdrop/Airdrop.read";
 import { useClaim } from "../../blockchain/Airdrop/Airdrop.write";
 import CountdownTimer from "../Shared/Countdown";
+import { useReadApproveForBuy } from "../../blockchain/Tokens/ERC20/ERC20.read";
+import {
+  useReadPause,
+  useReadStartTime,
+} from "../../blockchain/NFT/Sale/sale.read";
+import { useApproveForBuyNft } from "../../blockchain/Tokens/ERC20/ERC20.write";
+import { useMint } from "../../blockchain/NFT/Sale/sale.write";
+import { ethers } from "ethers";
 
 const Title: FunctionComponent<PropsWithChildren> = () => {
   const [end, setEnd] = useState(false);
+  const [amount, setAmount] = useState<number>(1);
   const { isConnected, address } = useAccount();
-  const { claimable, refetchUserAirdrop } = useAirdropUser(
-    address as `0x${string}`
+
+  const { approveBuy, refetchBuy } = useReadApproveForBuy(
+    amount <= 0 ? 1 : amount
   );
+  const { start, refetchStart } = useReadStartTime();
+  const { pause, refetchPause } = useReadPause();
 
-  const { airdropData, refetchAridrop } = useReadAirdropData();
-
-  const { claim } = useClaim();
+  const { approveForBuyNft } = useApproveForBuyNft(amount <= 0 ? 1 : amount);
+  const { buy } = useMint(amount <= 0 ? 1 : amount);
 
   useEffect(() => {
-    refetchUserAirdrop();
-    refetchAridrop();
     setEnd(false);
+    refetchStart();
+    refetchPause();
+    refetchBuy();
   }, [isConnected, address]);
 
-  function handleClaim(e: SyntheticEvent) {
+  function handleMint(e: SyntheticEvent) {
     e.preventDefault();
-    claim();
+    buy();
+  }
+
+  function handleApprove(e: SyntheticEvent) {
+    e.preventDefault();
+    approveForBuyNft();
   }
 
   return (
@@ -108,13 +125,43 @@ const Title: FunctionComponent<PropsWithChildren> = () => {
               <div
                 className="mt-5 pl-3 pr-3 pt-2 pb-2 bg-pepe_green1 text-[25px]
           border-[2px] border-pepe_white
-          rounded-md hover:underline
+          rounded-md 
           hover:shadow-[0px_0px_30px_6px_rgb(255,255,0)] transition-all 0.2"
               >
-                {claimable ? (
-                  <button onClick={(e) => handleClaim(e)}>
-                    Claim your airdrop !
-                  </button>
+                <div>Mint GEN1 SSR here !!</div>
+                {!pause ? (
+                  <form>
+                    <input
+                      type="number"
+                      placeholder="amount to mint"
+                      value={amount}
+                      onChange={(e: any) => setAmount(e.target.value)}
+                      className="text-pepe_green1 text-center p-2 rounded-md"
+                    ></input>
+                    <div className="flex gap-3">
+                      <button
+                        className="hover:underline disabled:text-pepe_black"
+                        onClick={(e) => handleApprove(e)}
+                        disabled={approveBuy}
+                      >
+                        approve
+                      </button>
+                      <button
+                        className="hover:underline disabled:text-pepe_black"
+                        disabled={!approveBuy}
+                        onClick={(e) => handleMint(e)}
+                      >
+                        mint
+                      </button>
+                    </div>
+                    <div className="text-[15px]">
+                      price:{" "}
+                      {ethers.utils.formatEther(
+                        "3000000000000000000000000000000"
+                      )}
+                      {" Pepe/NFT "}
+                    </div>
+                  </form>
                 ) : (
                   <div>To be honest. Our airdrop is not for you krub!</div>
                 )}
@@ -126,16 +173,13 @@ const Title: FunctionComponent<PropsWithChildren> = () => {
           rounded-md hover:underline
           hover:shadow-[0px_0px_30px_6px_rgb(255,255,0)] transition-all 0.2"
               >
-                Airdrop Time! Connect Wallet!
+                MINTING TIME! Connect Wallet!
               </div>
             )}
           </div>
         ) : (
           <div className="mt-5">
-            <CountdownTimer
-              endtimeMs={airdropData?.start}
-              setCanSettle={setEnd}
-            />
+            <CountdownTimer endtimeMs={start} setCanSettle={setEnd} />
           </div>
         )}
       </div>
