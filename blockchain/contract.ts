@@ -5,6 +5,7 @@ import { abiERC20 } from "./Tokens/ERC20/ERC20.abi";
 import { abiAridrop } from "./Airdrop/Airdrop.abi";
 import { abiNftdrop } from "./NFT/Airdrop/Nftdrop.abi";
 import { abiNft } from "./NFT/Nft/Nft.abi";
+import { abiNftSale } from "./NFT/Sale/sale.abi";
 
 const address = {
   // diamonRounter: "0xbD84F72a48a3B8412e0954e03BbDC218Dd194740",
@@ -21,6 +22,7 @@ const address = {
   airdrop: "0x23886109fD91D46A7d9f8c4ac72f28f1fee004A1",
   nftdrop: "0xa48Be9Bb236EB614252D439A19E3634BB938981C",
   gen1: "0xb5AFA38ce66b55dA0DC5A0711D0AcA1B00Ced87e",
+  saleSSR: "0xF40e244e4222A20c29FcDa5cD79B8EE67e8F1814",
 };
 
 export const contracts = {
@@ -51,6 +53,10 @@ export const contracts = {
   gen1: {
     abi: abiNft,
     address: address.gen1 as `0x${string}`,
+  },
+  saleSSR: {
+    abi: abiNftSale,
+    address: address.saleSSR as `0x${string}`,
   },
   pairs: {
     ethToToken: {
