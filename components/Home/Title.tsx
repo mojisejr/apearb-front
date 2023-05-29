@@ -23,6 +23,7 @@ import {
 import { useApproveForBuyNft } from "../../blockchain/Tokens/ERC20/ERC20.write";
 import { useMint } from "../../blockchain/NFT/Sale/sale.write";
 import { ethers } from "ethers";
+import BorderBox from "../Shared/BorderBox";
 
 const Title: FunctionComponent<PropsWithChildren> = () => {
   const [end, setEnd] = useState(false);
@@ -193,6 +194,19 @@ const Title: FunctionComponent<PropsWithChildren> = () => {
           height={400}
           alt="left-pepe"
         />
+        <BorderBox>
+          <div className="max-w-[500px] pt-3">
+            <div>*Important!*</div>
+            <p className="font-thin">
+              We{"'"}re still here!, Our sever has been back online. Development
+              is still on going!. Right now! we{"'"}re Back!!! for TG we has
+              broke up with our admin and we has no{" "}
+              <span className="text-[#ff0000]">ADMIN</span> anymore so the TG is
+              now closed until we get new{" "}
+              <span className="text-[#ff0000]">ADMIN</span>.
+            </p>
+          </div>
+        </BorderBox>
       </div>
     </div>
   );
